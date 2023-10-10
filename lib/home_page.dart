@@ -50,8 +50,8 @@ class _MyHomePageState extends State<MyHomePage> {
         indicatorColor: Colors.amber[800],
         destinations:const <NavigationDestination> [
           NavigationDestination(
-            selectedIcon: Icon(Icons.home),
-            icon: Icon(Icons.home_outlined),
+            selectedIcon:  Icon(Icons.home_outlined),
+            icon:Icon(Icons.home),
             label: 'Home',
           ),
           NavigationDestination(
@@ -60,12 +60,13 @@ class _MyHomePageState extends State<MyHomePage> {
             label: 'Create',
           ),
         ],
-        selectedIndex:_currentIndex,
         onDestinationSelected: (int index) {
           setState(() {
             _currentIndex = index;
           });
         },
+        selectedIndex:_currentIndex,
+
         animationDuration: const Duration(microseconds:600),
       ),
       body: _screens[_currentIndex],
