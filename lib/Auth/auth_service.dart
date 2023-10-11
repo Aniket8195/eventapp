@@ -1,3 +1,4 @@
+import 'package:eventapp/check_user.dart';
 import 'package:eventapp/home_page.dart';
 import 'package:eventapp/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,12 +15,12 @@ class AuthService {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasData) {
-          if (FirebaseAuth.instance.currentUser!.emailVerified) {
+          // if (FirebaseAuth.instance.currentUser!.emailVerified) {
             return const MyHomePage();
-          } else {
-            signOutWithoutSnackBar();
-            return const LoginPage();
-          }
+          // } else {
+          //   signOutWithoutSnackBar();
+          //   return const LoginPage();
+          // }
 // Navigate to the home page.
         } else {
           // User is not signed in.

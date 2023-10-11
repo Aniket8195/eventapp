@@ -1,8 +1,10 @@
-import 'package:eventapp/API/create_event.dart';
 import 'package:eventapp/Auth/auth_service.dart';
+import 'package:eventapp/Widgets/create_event.dart';
 import 'package:eventapp/feed.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+int currentIndex = 0;
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -14,15 +16,9 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    int _currentIndex = 0;
     final currentUser = FirebaseAuth.instance.currentUser;
-    final List<Widget>_screens=[
+    final List<Widget>screens=[
       const MainFeed(),
       const CreateEvent(),
     ];
@@ -41,14 +37,27 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             onPressed: () {
               AuthService().signOut(context);
-              Navigator.pop(context);
+              // Navigator.pop(context);
+              Navigator.popUntil(context, (route) => route.isFirst);
             },
           )
         ],
       ),
-      bottomNavigationBar: NavigationBar(
+
+      body: screens[currentIndex],
+      bottomNavigationBar:
+      NavigationBar(
+
+        selectedIndex:currentIndex,
+        onDestinationSelected: (int index) {
+          setState(() {
+            currentIndex = index;
+            print(currentIndex);
+          });
+        },
         indicatorColor: Colors.amber[800],
         destinations:const <NavigationDestination> [
+
           NavigationDestination(
             selectedIcon:  Icon(Icons.home_outlined),
             icon:Icon(Icons.home),
@@ -60,16 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
             label: 'Create',
           ),
         ],
-        onDestinationSelected: (int index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        selectedIndex:_currentIndex,
-
-        animationDuration: const Duration(microseconds:600),
       ),
-      body: _screens[_currentIndex],
     );
   }
 }
