@@ -1,7 +1,6 @@
 import 'package:eventapp/Auth/auth_service.dart';
 import 'package:eventapp/Widgets/create_event.dart';
 import 'package:eventapp/feed.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 int currentIndex = 0;
@@ -17,7 +16,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final currentUser = FirebaseAuth.instance.currentUser;
+    //final currentUser = FirebaseAuth.instance.currentUser;
     final List<Widget>screens=[
       const MainFeed(),
       const CreateEvent(),

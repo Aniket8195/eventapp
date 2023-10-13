@@ -1,4 +1,3 @@
-import 'package:eventapp/check_user.dart';
 import 'package:eventapp/home_page.dart';
 import 'package:eventapp/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
