@@ -4,7 +4,7 @@ import 'package:eventapp/API/get_event.dart';
 import 'package:http/http.dart' as http;
 
 Future<List<Event>> getUserEvents(int userID) async {
-  final url = Uri.parse('http://192.168.196.35/project/get_user_events.php'); // Adjust the URL to your PHP script location
+  final url = Uri.parse('http:// 192.168.1.119/project/get_user_events.php'); // Adjust the URL to your PHP script location
 
   final response = await http.post(
     url,

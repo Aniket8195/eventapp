@@ -1,5 +1,5 @@
+import 'package:eventapp/Auth/auth_service.dart';
 import 'package:eventapp/firebase_options.dart';
-import 'package:eventapp/home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -21,8 +21,9 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.deepOrange,
           useMaterial3: true,
         ),
-        home: const MyHomePage()
+        home:AuthService().handleAuthState()
     );
+
     //AuthService().handleAuthState());
 
   }

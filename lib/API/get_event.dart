@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class API {
-  static const hostConnect = "http://192.168.196.35/project";
+  static const hostConnect = "http://192.168.1.119/project";
   static const getEventsEndpoint = "/get_event.php";
 
   static Future<List<Event>> getEvents() async {
