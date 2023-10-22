@@ -40,9 +40,7 @@ class UserModel {
 }
 class User {
   final int userId;
-
   final String fullName;
-
   final String email;
   final List<Event> allEvents;
   final List<Event> createdEvents;
@@ -50,9 +48,7 @@ class User {
 
   User({
     required this.userId,
-
     required this.fullName,
-
     required this.email,
     required this.allEvents,
     required this.createdEvents,
@@ -82,9 +78,7 @@ class User {
 
     return User(
       userId: userId ?? 0,
-
       fullName: fullName ?? '',
-
       email: email ?? '',
       allEvents: allEvents,
       createdEvents: createdEvents,

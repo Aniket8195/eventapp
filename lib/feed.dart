@@ -4,7 +4,7 @@ import 'package:eventapp/API/user_model.dart';
 import 'package:eventapp/Widgets/create_event.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+UserModel userModel = UserModel();
 class MainFeed extends StatefulWidget {
   const MainFeed({super.key});
 
@@ -13,7 +13,7 @@ class MainFeed extends StatefulWidget {
 }
 
 class _MainFeedState extends State<MainFeed> {
-  UserModel userModel = UserModel(); // Create an instance of UserModel
+   // Create an instance of UserModel
   List<Event> createdEventsFeed = [];
   List<Event> allEventsFeed = [];
   Check c= Check();
@@ -26,11 +26,14 @@ class _MainFeedState extends State<MainFeed> {
       c.checkUser();
       userModel.fetchUserByEmail(user1.email!).then((_) {
         setState(() {
-          print(userModel.user?.email);
+          //print(userModel.user?.email);
           print(userModel.user?.fullName);
           print(userModel.user?.allEvents);
+          print(userModel.user?.createdEvents);
           // createdEventsFeed = userModel.user?.createdEvents ?? [];
           allEventsFeed=userModel.user?.allEvents??[];
+          createdEventsFeed=userModel.user!.createdEvents;
+          print(createdEventsFeed);
         });
       });}
 
@@ -115,53 +118,54 @@ class _MainFeedState extends State<MainFeed> {
             Visibility(
               visible: createdEventsFeed.isNotEmpty,
               child: SizedBox(
-                height: 200,
-                width: double.infinity,
-                child: ListView.builder(
-                  itemCount:createdEventsFeed.length,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder:(context,index){
-                    return GestureDetector(
-                      onTap: (){
-                      },
-                      child: SizedBox(
-                        width: 200,
-                        child: Card(
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(createdEventsFeed[index].title),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    const Icon(Icons.calendar_month_sharp),
-                                    Text(createdEventsFeed[index].eventDate),
-                                  ],
+                  height: 200,
+                  width: double.infinity,
+                  child: ListView.builder(
+                    itemCount:createdEventsFeed.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder:(context,index){
+                      return GestureDetector(
+                        onTap: (){
+                        },
+                        child: SizedBox(
+                          width: 200,
+                          child: Card(
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(createdEventsFeed[index].title),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    const Icon(Icons.access_time_filled),
-                                    Text(createdEventsFeed[index].eventTime),
-                                  ],
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      const Icon(Icons.calendar_month_sharp),
+                                      Text(createdEventsFeed[index].eventDate),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      const Icon(Icons.access_time_filled),
+                                      Text(createdEventsFeed[index].eventTime),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
-              ),
             ),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -183,7 +187,7 @@ class _MainFeedState extends State<MainFeed> {
               width: 700,
               height: 100,
               child: Padding(
-                padding: EdgeInsets.only(left: 20,top: 10,bottom: 8),
+                padding: const EdgeInsets.only(left: 20,top: 10,bottom: 8),
                 child: Row(
                   children: [
                     GestureDetector(
